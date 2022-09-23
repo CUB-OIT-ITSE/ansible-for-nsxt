@@ -1,7 +1,7 @@
 # Copyright 2018 VMware, Inc.
 # SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
 ---
-hostname: "10.161.153.186"
+hostname: "10.192.254.207"
 username: "admin"
 password: "Admin!23Admin"
 validate_certs: False
@@ -16,11 +16,9 @@ ip_pools:
 
 transportzones:
 - display_name: "TZ1"
-  transport_type: "OVERLAY"
-  host_switch_name: "hostswitch1"
+  tz_type: "VLAN_BACKED"
 # - display_name: "TZ2"
-#   transport_type: "VLAN"
-#   host_switch_name: "hostswitch2"
+#   tz_type: "OVERLAY_BACKED"
 
 uplink_profiles:
 - display_name: uplinkProfile1
@@ -95,6 +93,14 @@ edge_transport_nodes:
         cli_password: "Admin!23Admin"
         root_password: "Admin!23Admin"
       vm_deployment_config:
+        ipv4_assignment_enabled: false
+        ipv6_assignment_type: "STATIC"
+        management_port_subnets:
+          - ip_addresses:
+              - "2002:0:0:0:0:0:0:10"
+            prefix_length: 64
+        default_gateway_addresses:
+          - "2002:0:0:0:0:0:0:10"
         placement_type: VsphereDeploymentConfig
         vc_name: "VC"
         vc_username: "administrator@vsphere.local"
